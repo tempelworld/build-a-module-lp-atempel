@@ -1,2 +1,2 @@
-# build-a-module-lp-author
+# build-a-module-lp-atempel
 Repository for liveProject: Build a Module
