@@ -15,15 +15,15 @@ function Invoke-GitHub() {
 
     [CmdletBinding()]
     Param(
-       [Parameter(Mandatory)] 
-       [string]$endpoint,
+        [Parameter(Mandatory)] 
+        [string]$endpoint,
 
-       [hashtable]$body,
+        [hashtable]$body,
 
-       [ValidateSet("Get", "Post", "Delete", "Patch")]
-       [string]$method = "Get",
+        [ValidateSet("Get", "Post", "Delete", "Patch")]
+        [string]$method = "Get",
 
-       [switch]$returnRaw
+        [switch]$returnRaw
     )
    
     Begin {
@@ -33,7 +33,7 @@ function Invoke-GitHub() {
     Process {
         Write-Verbose -Message "[PRC]-[INFO] Processing $($myinvocation.mycommand)"
 
-        if ( -not ($Script:Connection)){
+        if ( -not ($Script:Connection)) {
             throw "[PRC]-[WARN] Please connect to GitHub"
         }
 
@@ -41,17 +41,17 @@ function Invoke-GitHub() {
         Write-Verbose -Message "[PRC]-[INFO] Url : [$url]"
         
         $params = @{
-            Method = $method
+            Method  = $method
             Headers = $Script:Connection.Headers
-            Uri = $url
+            Uri     = $url
         }
 
-        if ($PSBoundParameters.ContainsKey('Body')){
+        if ($PSBoundParameters.ContainsKey('Body')) {
             $params.Add("body", (ConvertTo-Json -InputObject $body -Depth 99))
         }
-
+        Write-Verbose -Message "[PRC]-[INFO] Calling API : [$method - $url]"
         $response = Invoke-WebRequest @params
-        if ($returnRaw.IsPresent){
+        if ($returnRaw.IsPresent) {
             return $response
         }
         else {

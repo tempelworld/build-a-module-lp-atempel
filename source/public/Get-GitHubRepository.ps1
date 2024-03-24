@@ -30,12 +30,14 @@ function Get-GitHubRepository() {
         Write-Verbose -Message "[PRC]-[INFO] Processing $($myinvocation.mycommand)"
 
         $endpoint = "repos/$($owner)/$($repo)"
+        $method = "Get"
 
         $params = @{
             endpoint = $endpoint
+            method   = $method
         }
 
-        Write-Verbose -Message "[PRC]-[INFO] Calling Endpoint : [$($endpoint)]"
+        Write-Verbose -Message "[PRC]-[INFO] Invoking Github : [$($method) - $($endpoint)]"
         Invoke-GitHub @params | ConvertFrom-Json
     }
 

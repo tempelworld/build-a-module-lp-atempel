@@ -13,16 +13,16 @@ function Connect-GitHub() {
     .OUTPUTS
     #>
 
-   [CmdletBinding()]
-   Param(
-    [Parameter(Mandatory)]
-    [securestring]$token,
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory)]
+        [securestring]$token,
 
-    [string]$baseUrl = "https://api.github.com",
+        [string]$baseUrl = "https://api.github.com",
 
-    [ValidateSet("2022-11-28")]
-    [string]$apiVersion = "2022-11-28"
-   )
+        [ValidateSet("2022-11-28")]
+        [string]$apiVersion = "2022-11-28"
+    )
    
     Begin {
         Write-Verbose -Message "[BEG]-[INFO] Begining $($myinvocation.mycommand)"
@@ -33,23 +33,23 @@ function Connect-GitHub() {
 
         $headers = @{
             "X-GitHub-ApiVersion" = $apiVersion
-            "Authorization" = "Bearer $($token | ConvertFrom-SecureString -AsPlainText)"
+            "Authorization"       = "Bearer $($token | ConvertFrom-SecureString -AsPlainText)"
         }
 
         $params = @{
-            Uri = $baseUrl
+            Uri     = $baseUrl
             Headers = $headers
-            Method = "Get"
+            Method  = "Get"
         }
 
         $result = Invoke-RestMethod @params
         $currentUser = Invoke-RestMethod -Uri $result."current_user_url" -Headers $headers
 
         $Script:Connection = @{
-            Headers = $headers
+            Headers    = $headers
             ApiVersion = $apiVersion
-            BaseUrl = $baseUrl
-            Token = $token
+            BaseUrl    = $baseUrl
+            Token      = $token
         }
 
         Write-Verbose "[PRC]-[INFO] Logged in as: [$($currentUser.login)]"
