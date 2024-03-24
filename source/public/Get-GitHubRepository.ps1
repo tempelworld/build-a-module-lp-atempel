@@ -23,23 +23,23 @@ function Get-GitHubRepository() {
     )
    
     Begin {
-        Write-Verbose -Message "[BEG]-[INFO] Begining $(myinvocation.mycommand)"
+        Write-Verbose -Message "[BEG]-[INFO] Begining $($myinvocation.mycommand)"
     }
 
     Process {
-        Write-Verbose -Message "[PRC]-[INFO] Processing $(myinvocation.mycommand)"
+        Write-Verbose -Message "[PRC]-[INFO] Processing $($myinvocation.mycommand)"
 
-        $enpoint = "repos/$owner/$repo"
+        $endpoint = "repos/$($owner)/$($repo)"
 
         $params = @{
-            $endpoint = $enpoint
+            endpoint = $endpoint
         }
 
-        Write-Verbose -Message "[PRC]-[INFO] Calling Endpoint : [$($enpoint)]"
+        Write-Verbose -Message "[PRC]-[INFO] Calling Endpoint : [$($endpoint)]"
         Invoke-GitHub @params | ConvertFrom-Json
     }
 
     End {
-        Write-Verbose -Message "[END]-[INFO] Ending $(myinvocation.mycommand)"
+        Write-Verbose -Message "[END]-[INFO] Ending $($myinvocation.mycommand)"
     }
 }

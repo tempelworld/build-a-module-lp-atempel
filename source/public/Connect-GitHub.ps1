@@ -25,11 +25,11 @@ function Connect-GitHub() {
    )
    
     Begin {
-        Write-Verbose -Message "[BEG]-[INFO] Begining $(myinvocation.mycommand)"
+        Write-Verbose -Message "[BEG]-[INFO] Begining $($myinvocation.mycommand)"
     }
 
     Process {
-        Write-Verbose -Message "[PRC]-[INFO] Processing $(myinvocation.mycommand)"
+        Write-Verbose -Message "[PRC]-[INFO] Processing $($myinvocation.mycommand)"
 
         $headers = @{
             "X-GitHub-ApiVersion" = $apiVersion
@@ -48,7 +48,7 @@ function Connect-GitHub() {
         $Script:Connection = @{
             Headers = $headers
             ApiVersion = $apiVersion
-            Server = $baseUrl
+            BaseUrl = $baseUrl
             Token = $token
         }
 
@@ -56,6 +56,6 @@ function Connect-GitHub() {
     }
 
     End {
-        Write-Verbose -Message "[END]-[INFO] Ending $(myinvocation.mycommand)"
+        Write-Verbose -Message "[END]-[INFO] Ending $($myinvocation.mycommand)"
     }
 }

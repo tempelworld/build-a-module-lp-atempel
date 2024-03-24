@@ -27,17 +27,17 @@ function Invoke-GitHub() {
     )
    
     Begin {
-        Write-Verbose -Message "[BEG]-[INFO] Begining $(myinvocation.mycommand)"
+        Write-Verbose -Message "[BEG]-[INFO] Begining $($myinvocation.mycommand)"
     }
 
     Process {
-        Write-Verbose -Message "[PRC]-[INFO] Processing $(myinvocation.mycommand)"
+        Write-Verbose -Message "[PRC]-[INFO] Processing $($myinvocation.mycommand)"
 
         if ( -not ($Script:Connection)){
             throw "[PRC]-[WARN] Please connect to GitHub"
         }
 
-        $url = "$($Script:Connection.$baseUrl)/$($endpoint.TrimStart("/"))"
+        $url = "$($Script:Connection.baseUrl)/$($endpoint.TrimStart("/"))"
         Write-Verbose -Message "[PRC]-[INFO] Url : [$url]"
         
         $params = @{
@@ -60,6 +60,6 @@ function Invoke-GitHub() {
     }
 
     End {
-        Write-Verbose -Message "[END]-[INFO] Ending $(myinvocation.mycommand)"
+        Write-Verbose -Message "[END]-[INFO] Ending $($myinvocation.mycommand)"
     }
 }
