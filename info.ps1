@@ -8,3 +8,5 @@ New-Item -Path .\source\ -Name "private" -ItemType "directory"
 New-Item -Path .\source\ -Name "classes" -ItemType "directory"
 New-Item -Path .\source\ -Name "enum" -ItemType "directory"
 
+#
+
