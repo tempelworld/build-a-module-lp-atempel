@@ -57,3 +57,14 @@ $params = @{
 }
 
 .\build.ps1 @params
+
+# git
+git log --oneline
+
+# 
+git config --global user.email
+git config --global user.name
+git config --global user.name Alex
+
+
+

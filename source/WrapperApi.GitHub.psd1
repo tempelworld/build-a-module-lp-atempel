@@ -21,13 +21,13 @@ ModuleVersion = '0.0.1'
 GUID = 'b768ef91-9842-4922-82e7-2183c37fe4b3'
 
 # Author of this module
-Author = 'alexa'
+Author = 'alex'
 
 # Company or vendor of this module
 CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) alexa. All rights reserved.'
+Copyright = '(c) alex. All rights reserved.'
 
 # Description of the functionality provided by this module
 # Description = ''
