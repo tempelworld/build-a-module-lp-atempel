@@ -30,16 +30,21 @@ function Connect-GitHub() {
 
     Process {
         Write-Verbose -Message "[PRC]-[INFO] Processing $($myinvocation.mycommand)"
+        
+        # content type is needed on api for patch
+        $contentType = "application/json"
+        $method = "Get"
 
         $headers = @{
             "X-GitHub-ApiVersion" = $apiVersion
             "Authorization"       = "Bearer $($token | ConvertFrom-SecureString -AsPlainText)"
+            "Content-Type"         = $contentType
         }
 
         $params = @{
             Uri     = $baseUrl
             Headers = $headers
-            Method  = "Get"
+            Method  = $method
         }
 
         $result = Invoke-RestMethod @params
@@ -52,6 +57,7 @@ function Connect-GitHub() {
             Token      = $token
         }
 
+        Write-Verbose "[PRC]-[INFO] [$($method) - $($baseUrl)]"
         Write-Verbose "[PRC]-[INFO] Logged in as: [$($currentUser.login)]"
     }
 

@@ -8,17 +8,7 @@ New-Item -Path .\source\ -Name "private" -ItemType "directory"
 New-Item -Path .\source\ -Name "classes" -ItemType "directory"
 New-Item -Path .\source\ -Name "enum" -ItemType "directory"
 
-#
-[securestring]$todaytoken = "github_pat_11ASYMF5A02FjiTaTH2J3m_D4SxraeWtPicI"  | ConvertTo-SecureString -AsPlainText 
-
-[securestring]$todaytokenClassic = "ghp_87OvZOY3nvXnGgUKxOhzTiwN"  | ConvertTo-SecureString -AsPlainText 
-
-$($todaytoken | ConvertFrom-SecureString -AsPlainText)
-$($todaytokenClassic | ConvertFrom-SecureString -AsPlainText)
-
-Connect-GitHub $todaytoken -Verbose
-Connect-GitHub $todaytokenClassic -Verbose
-
+# get github repoe
 $params = @{
     owner = "tempelworld"
     repo  = "apitest"
@@ -28,8 +18,7 @@ $repo = Get-GitHubRepository @params -Verbose
 $repo
 $repo.full_name
 
-
-
+# create new github repo
 $params = @{
     name = "apitest07"
 }
@@ -38,16 +27,33 @@ $repo = New-GitHubRepository @params -Verbose
 $repo
 $repo.full_name
 
-
-
-:ToDo - content-type gives error
-
+# rename a github repo
 $params = @{
     owner = "tempelworld"
     repo = "apitest07"
     name = "apitestNew07"
 }
 
-$repo = Set-GitHubRepository @params -Verbose
+$repo = Set-GitHubRepository @params -Verbose 
 $repo
 $repo.full_name
+
+# delete a github repo
+
+$params = @{
+    owner = "tempelworld"
+    repo  = "apitest03"
+}
+
+$repo = Remove-GitHubRepository @params -Verbose
+
+# make manifest file (run once)
+# New-ModuleManifest -Path .\source\WrapperApi.GitHub.psd1 -RootModule WrapperApi.GitHub.psm1
+
+# build module
+$params = @{
+    version = '1.0.0'
+    name = 'WrapperApi.GitHub'
+}
+
+.\build.ps1 @params

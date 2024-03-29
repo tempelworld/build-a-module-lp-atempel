@@ -52,6 +52,8 @@ function Set-GitHubRepository() {
     Process {
         Write-Verbose -Message "[PRC]-[INFO] Processing $($MyInvocation.mycommand)"
 
+        $method = "Patch"
+
         $endpoint = "repos/$Owner/$Repo"
         Write-Verbose -Message "[PRC]-[INFO] Endpoint : [$($endpoint)]"
 
@@ -83,7 +85,7 @@ function Set-GitHubRepository() {
 
         $params = @{
             endpoint = $endpoint
-            method   = "Patch"
+            method   = $method
             body     = $body
         }
         Write-Verbose -Message "[PRC]-[INFO] Invoking Github : [$($method) - $($endpoint)]"
